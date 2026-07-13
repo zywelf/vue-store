@@ -1,0 +1,45 @@
+:root {
+  /* Colors */
+  --color-bg: #ffffff;
+  --color-surface: #f5f5f5; /* Background Card */
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-accent: #2563eb; /* Principal Color */
+  --color-error: #dc2626;
+
+  /* Spacing */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 3rem; /* 48px */
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif; /* Main font with fallback */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl: 2rem; /* 32px */
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+
+  /* Other */
+  --radius: 0.5rem; /* 8px */
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --transition: 200ms ease-in-out;
+}
+
+[data-theme='dark'] {
+  --color-bg: #0f0f0f;
+  --color-surface: #1a1a1a; /* Background Card */
+  --color-text: #ededed;
+  --color-text-muted: #9ca3af;
+  --color-border: #2e2e2e;
+  --color-accent: #3b82f6; /* Principal Color (lighter for dark bg) */
+  --color-error: #ef4444;
+
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
