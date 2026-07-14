@@ -1,9 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import AppHeader from './components/AppHeader.vue'
+import { api } from './services/api'
+
+const categories = ref<string[]>([])
+
+onMounted(async () => {
+  try {
+    categories.value = await api.getCategories()
+  } catch {
+    categories.value = []
+  }
+})
+</script>
 
 <template>
-  <header class="header">
-    <h1>Store</h1>
-  </header>
+  <AppHeader :categories="categories" />
 
   <main class="main">
     <RouterView />
@@ -11,11 +23,6 @@
 </template>
 
 <style scoped>
-.header {
-  padding: var(--space-md) var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
-}
-
 .main {
   max-width: 87.5rem; /* 1400px */
   margin: 0 auto;
