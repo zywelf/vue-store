@@ -28,7 +28,7 @@
   --radius: 0.5rem; /* 8px */
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
-  --transition: 200ms ease-in-out;
+  --transition: 300ms ease-in-out;
 }
 
 [data-theme='dark'] {
