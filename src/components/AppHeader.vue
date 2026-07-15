@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
+import { useTheme } from '@/composables/useTheme'
+
+const { theme, toggleTheme } = useTheme()
 
 defineProps<{
   categories: string[]
@@ -28,6 +31,15 @@ const selectedCategory = computed(() => route.query.category as string | undefin
         {{ category }}
       </RouterLink>
     </nav>
+    <div class="actions">
+      <button
+        @click="toggleTheme"
+        class="theme-toggle"
+        :aria-label="`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`"
+      >
+        {{ theme === 'light' ? '🌙' : '☀️' }}
+      </button>
+    </div>
   </header>
 </template>
 
@@ -93,5 +105,29 @@ const selectedCategory = computed(() => route.query.category as string | undefin
     align-items: flex-start;
     gap: var(--space-md);
   }
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-sm);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition);
+}
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
 }
 </style>
