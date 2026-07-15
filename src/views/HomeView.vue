@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import type { Product } from '@/types'
 import { api } from '@/services/api'
 import ProductCard from '@/components/ProductCard.vue'
+import ProductCardSkeleton from '@/components/ProductCardSkeleton.vue'
 
 const products = ref<Product[]>([])
 const isLoading = ref(false)
@@ -33,7 +34,13 @@ watch(selectedCategory, fetchProducts, { immediate: true })
 
 <template>
   <div>
-    <p v-if="isLoading" class="state-message">Loading...</p>
+    <p v-if="isLoading" class="state-message">
+      <ul v-if="isLoading" class="grid">
+        <li v-for="n in 8" :key="n">
+          <ProductCardSkeleton />
+        </li>
+      </ul>
+    </p>
 
     <p v-else-if="error" class="state-message">
       {{ error }}
