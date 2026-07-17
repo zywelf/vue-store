@@ -3,12 +3,15 @@ import { useRoute } from 'vue-router'
 import { api } from '@/services/api'
 import { computed, ref, watch } from 'vue'
 import type { Product } from '@/types'
+import { useCartStore } from '@/stores/cart'
+import { ShoppingCart } from 'lucide-vue-next'
 
 const product = ref<Product | null>(null)
 const isLoading = ref(false)
 const error = ref<string | null>(null)
 
 const route = useRoute()
+const cart = useCartStore()
 
 const productId = computed(() => route.params.id as string)
 
@@ -41,6 +44,10 @@ watch(productId, fetchProduct, { immediate: true })
           <h1 class="detail-title">{{ product.title }}</h1>
           <p class="detail-price">{{ product.price }} €</p>
           <p class="detail-description">{{ product.description }}</p>
+          <button @click="cart.addItem(product)" class="add-to-cart">
+            <ShoppingCart :size="20" />
+            Add to cart
+          </button>
         </div>
       </article>
     </div>
@@ -120,10 +127,38 @@ watch(productId, fetchProduct, { immediate: true })
   font-size: var(--font-size-sm);
   transition: color var(--transition);
 }
+
 .back-link:hover {
   color: var(--color-accent);
 }
+
 .back-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.add-to-cart {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: opacity var(--transition);
+  align-self: flex-start;
+}
+
+.add-to-cart:hover {
+  opacity: 0.85;
+}
+
+.add-to-cart:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }

@@ -2,8 +2,11 @@
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 import { useTheme } from '@/composables/useTheme'
+import { useCartStore } from '@/stores/cart'
+import { ShoppingCart } from 'lucide-vue-next'
 
 const { theme, toggleTheme } = useTheme()
+const cart = useCartStore()
 
 defineProps<{
   categories: string[]
@@ -39,6 +42,10 @@ const selectedCategory = computed(() => route.query.category as string | undefin
       >
         {{ theme === 'light' ? '🌙' : '☀️' }}
       </button>
+      <div class="cart">
+        <ShoppingCart :size="20" />
+        <span v-if="cart.count > 0" class="cart-badge">{{ cart.count }}</span>
+      </div>
     </div>
   </header>
 </template>
@@ -129,5 +136,26 @@ const selectedCategory = computed(() => route.query.category as string | undefin
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+}
+
+.cart {
+  position: relative;
+  display: inline-flex;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
 }
 </style>
