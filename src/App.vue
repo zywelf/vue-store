@@ -18,7 +18,11 @@ onMounted(async () => {
   <AppHeader :categories="categories" />
 
   <main class="main">
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </main>
 </template>
 
@@ -27,5 +31,23 @@ onMounted(async () => {
   max-width: 87.5rem; /* 1400px */
   margin: 0 auto;
   padding: var(--space-xl) var(--space-lg);
+}
+</style>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
