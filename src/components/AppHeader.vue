@@ -108,9 +108,19 @@ const selectedCategory = computed(() => route.query.category as string | undefin
 
 @media (max-width: 48rem) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-md);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md); 
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-xs);
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);           
   }
 }
 
